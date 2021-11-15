@@ -1,0 +1,32 @@
+﻿<Page x:Class="Marafon.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center" Margin="0, 25, 0, 0" FontSize="36" FontFamily="Calibri" FontWeight="Bold" Foreground="AliceBlue">MARATHON SKILLS 2016</TextBlock>
+            <TextBlock HorizontalAlignment="Center" TextAlignment="Center" Foreground="LightGray" FontSize="16" Text="Москва, Россия &#xA; среда 21 октября 2016 года" Margin="0,6, 0, 0"/>
+        </StackPanel>
+        <Rectangle Grid.Row="1" Fill="White"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
+            <Button Style="{DynamicResource RoundButton}" Width="335" Height="65" Margin="0, 0, 0, 0" Content="Я хочу стать бегуном" Name="ChoiceButton"></Button>
+            <Separator Visibility="Hidden"/>
+            <Button Style="{DynamicResource RoundButton}" Width="335" Height="65" Margin="0, 0, 0, 0" Content="Я хочу стать спонсором бегуна"></Button>
+            <Separator Visibility="Hidden"/>
+            <Button Style="{DynamicResource RoundButton}" Width="335" Height="65" Margin="0, 0, 0, 0" Content="Я хочу узнать больше о событии"></Button>
+        </StackPanel>
+
+        <Button Grid.Row="1" Style="{DynamicResource RoundButton}" Width="130" Height="40" Margin="0, 210, 30, 0" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Login" FontSize="22" Name="LoginButton"></Button>
+        <TextBlock Text="{Binding TimeStampLine}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="AliceBlue" Grid.Row="2" Name="Timer"/>
+    </Grid>
+</Page>

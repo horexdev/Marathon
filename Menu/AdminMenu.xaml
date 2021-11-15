@@ -1,0 +1,38 @@
+﻿<Page x:Class="Marafon.Menu.AdminMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Marafon"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CoordinatorMenu">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="1" Fill="White"/>
+        <Button Grid.Row="0" Name="GoBackButton" Width="75" Height="35" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15, 0, 0, 0" Foreground="DarkSlateGray" Content="Назад" Style="{DynamicResource GoBackButton}"/>
+        <Label Grid.Row="0" Style="{DynamicResource HeaderFont}" FontSize="36" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="130, 0, 0, 0">MARATHON SKILLS 2016</Label>
+        <Label Grid.Row="1" Content="Меню администратора" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25"  Margin="0,10,0,0"/>
+        <UniformGrid Columns="2" Width="Auto" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 100, 0, 0">
+            <Button Height="55" Width="225" Style="{DynamicResource RoundButtonRunnerMenu}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <TextBlock Text="Пользователи" TextAlignment="Center"/>
+            </Button>
+            <Button Height="55" Width="225" Style="{DynamicResource RoundButtonRunnerMenu}">
+                <TextBlock Text="Волонтеры" TextAlignment="Center"/>
+            </Button>
+            <Button Height="55" Width="225" Style="{DynamicResource RoundButtonRunnerMenu}">
+                <TextBlock Text="Благотворительные &#xA;организации" TextAlignment="Center"/>
+            </Button>
+            <Button Height="55" Width="225" Style="{DynamicResource RoundButtonRunnerMenu}">
+                <TextBlock Text="Инвентарь" TextAlignment="Center"/>
+            </Button>
+        </UniformGrid>
+        <Button Grid.Row="0" Width="75" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" Content="Logout" Style="{DynamicResource RoundButton}" FontSize="16" FontWeight="Black" Name="LogoutButton"></Button>
+        <TextBlock Text="{Binding TimeStampLine}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="AliceBlue" Grid.Row="2" Name="Timer"/>
+    </Grid>
+</Page>
