@@ -6,10 +6,12 @@
         public const string Coordinator = "Coordinator";
         public const string Runner = "Runner";
 
-        public void GetAbbreviation(string role)
+        public static string GetAbbreviation(string role)
         {
-            if (role != Administrator || role != Coordinator || role != Runner)
-                return;
+            if (role == Administrator || role == Coordinator || role == Runner)
+                return role.Remove(1);
+
+            return null;
         }
     }
 }
