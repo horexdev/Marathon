@@ -23,5 +23,15 @@ namespace Marafon.Database
                 return role?.RoleName;
             }
         }
+
+        public static string GetCountryCodeByName(string countryName)
+        {
+            using (var context = new marathonEntities())
+            {
+                var country = context.country.FirstOrDefault(c => c.CountryName == countryName);
+
+                return country?.CountryCode;
+            }
+        }
     }
 }
