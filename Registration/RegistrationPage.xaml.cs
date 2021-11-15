@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Marafon.Database;
@@ -31,8 +32,10 @@ namespace Marafon.Registration
             var passwordRepeat = PasswordRepeatTextBox.Text;
             var firstName = FirstNameTextBox.Text;
             var lastName = LastNameTextBox.Text;
-            var gender = GenderComboBox.SelectionBoxItemStringFormat;
-            var country = CountryComboBox.SelectionBoxItemStringFormat;
+            var gender = GenderComboBox.SelectedItem.ToString();
+            var country = CountryComboBox.SelectedItem.ToString();
+            var countryCode = Context.GetCountryCodeByName(country);
+            var roleAbbreviation = RoleTypes.GetAbbreviation(RoleTypes.Runner);
 
             if (string.IsNullOrEmpty(email)
                 || string.IsNullOrEmpty(password)
@@ -42,6 +45,9 @@ namespace Marafon.Registration
                 || string.IsNullOrEmpty(gender)
                 || string.IsNullOrEmpty(country))
                 return;
+
+            if (roleAbbreviation == null)
+                throw new NullReferenceException("Role Abbreviation Null Reference Exception");
 
             if (PasswordTextBox.Text != PasswordRepeatTextBox.Text)
             {
@@ -58,18 +64,19 @@ namespace Marafon.Registration
                     Password = password,
                     FirstName = firstName,
                     LastName = lastName,
-                    RoleId = "R"
+                    RoleId = roleAbbreviation
                 };
 
-                /*var runner = new runner
+                var runner = new runner
                 {
                     Email = email,
-                    Gender = "",
+                    Gender = gender,
                     DateOfBirth = new DateTime?(),
-                    CountryCode = ""
-                };*/
+                    CountryCode = countryCode
+                };
 
                 context.users.Add(user);
+                context.runner.Add(runner);
                 context.SaveChanges();
             }
         }
