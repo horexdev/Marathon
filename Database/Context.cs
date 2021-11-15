@@ -33,6 +33,5 @@ namespace Marafon.Database
                 return country?.CountryCode;
             }
         }
-		// Hello World
     }
 }
