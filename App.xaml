@@ -52,5 +52,13 @@
             <Setter Property="Stroke" Value="DarkSlateGray"/>
             <Setter Property="StrokeThickness" Value="3"/>
         </Style>
+        <Style TargetType="Image" x:Key="Avatar">
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="7" />
+                    <Setter Property="BorderBrush" Value="DarkSlateGray"/>
+                </Style>
+            </Style.Resources>
+        </Style>
     </Application.Resources>
 </Application>
