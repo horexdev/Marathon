@@ -23,13 +23,18 @@ namespace Marafon.Registration
 
             GoBackButton.Click += Navigation.GoBack;
             RegisterButton.Click += RegisterButton_Click;
+            PasswordRepeatTextBox.PasswordChanged += PasswordRepeatTextBox_TextChanged; ;
+
+            _registrationHandler = new RegistrationHandler();
         }
+
+        private readonly RegistrationHandler _registrationHandler;
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             var email = EmailTextBox.Text;
-            var password = PasswordTextBox.Text;
-            var passwordRepeat = PasswordRepeatTextBox.Text;
+            var password = PasswordTextBox.Password;
+            var passwordRepeat = PasswordRepeatTextBox.Password;
             var firstName = FirstNameTextBox.Text;
             var lastName = LastNameTextBox.Text;
             var gender = GenderComboBox.SelectedItem.ToString();
@@ -46,38 +51,47 @@ namespace Marafon.Registration
                 || string.IsNullOrEmpty(country))
                 return;
 
+            if (_registrationHandler.IsValidPassword(password) == false)
+            {
+                MessageBox.Show("Пароль должен отвечать следующим требованиям\rМинимум 6 символов\rМинимум 1 прописная буква\rМинимум 1 цифра\rМинимум один из следующих символов: ! @ # $ % ^", "", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                return;
+            }
+
             if (roleAbbreviation == null)
                 throw new NullReferenceException("Role Abbreviation Null Reference Exception");
 
-            if (PasswordTextBox.Text != PasswordRepeatTextBox.Text)
+            if (_registrationHandler.IsValidEmail(email) == false)
+            {
+                MessageBox.Show("Введённая вами электронная почта не соответствует формату");
+
+                return;
+            }
+
+            if (PasswordTextBox.Password != PasswordRepeatTextBox.Password)
             {
                 MessageBox.Show("Пароли не совпадают");
 
                 return;
             }
 
-            using (var context = new marathonEntities())
+            _registrationHandler.RegisterUser(email, password, firstName, lastName, roleAbbreviation);
+            _registrationHandler.RegisterRunner(email, gender, new DateTime(), countryCode);
+        }
+
+        private void PasswordRepeatTextBox_TextChanged(object sender, RoutedEventArgs e)
+        {
+            var currentPassword = PasswordTextBox.Password;
+            var repeatedPassword = PasswordRepeatTextBox.Password;
+
+            if (currentPassword == repeatedPassword)
+                PasswordConfirmedImage.Visibility = Visibility.Visible;
+            else
             {
-                var user = new users
-                {
-                    Email = email,
-                    Password = password,
-                    FirstName = firstName,
-                    LastName = lastName,
-                    RoleId = roleAbbreviation
-                };
+                if (PasswordConfirmedImage.Visibility == Visibility.Hidden)
+                    return;
 
-                var runner = new runner
-                {
-                    Email = email,
-                    Gender = gender,
-                    DateOfBirth = new DateTime?(),
-                    CountryCode = countryCode
-                };
-
-                context.users.Add(user);
-                context.runner.Add(runner);
-                context.SaveChanges();
+                PasswordConfirmedImage.Visibility = Visibility.Hidden;
             }
         }
     }
