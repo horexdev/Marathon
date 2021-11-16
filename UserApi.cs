@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Data.Entity.Migrations;
+using System.IO;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using Marafon.Database;
 
 namespace Marafon
@@ -34,6 +38,34 @@ namespace Marafon
         {
             ResetUser();
             Navigation.Navigate(new MainPage());
+        }
+
+        public static bool IsUserHaveAvatar() => _localUser.Avatar?.Length > 0;
+
+        public static byte[] ConvertAvatarToBinary(string path)
+        {
+            using (var st = new FileStream(path, FileMode.Open))
+            {
+                var buffer = new byte[st.Length];
+                st.Read(buffer, 0, (int)st.Length);
+
+                return buffer;
+            }
+        }
+
+        public static BitmapImage ConvertBinaryToAvatar(byte[] buffer)
+        {
+            using (var memoryStream = new MemoryStream(buffer))
+            {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memoryStream;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
+            }
         }
     }
 }
