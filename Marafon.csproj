@@ -67,6 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Auth\AuthHandler.cs" />
+    <Compile Include="Registration\RegistrationHandler.cs" />
     <Compile Include="RoleTypes.cs" />
     <Compile Include="Database\Context.cs" />
     <Compile Include="MarathonInfo.xaml.cs">
@@ -274,6 +275,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icon-isOk.png" />
     <Resource Include="Resources\map.png" />
   </ItemGroup>
   <ItemGroup>
