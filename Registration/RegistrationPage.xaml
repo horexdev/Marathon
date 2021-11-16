@@ -47,15 +47,16 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                     <TextBox Style="{DynamicResource TextBoxDefault}" x:Name="EmailTextBox" Height="30" Width="200" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="18"></TextBox>
                     <Separator Visibility="Hidden" Margin="0, 15, 0, 0"/>
-                    <TextBox Style="{DynamicResource TextBoxDefault}" x:Name="PasswordTextBox" Height="30" Width="150" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="18"></TextBox>
+                    <PasswordBox Style="{DynamicResource PasswordBoxDefault}" x:Name="PasswordTextBox" Height="30" Width="150" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="18"></PasswordBox>
                     <Separator Visibility="Hidden" Margin="0, 15, 0, 0"/>
-                    <TextBox Style="{DynamicResource TextBoxDefault}" x:Name="PasswordRepeatTextBox" Height="30" Width="150" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="18"></TextBox>
+                    <PasswordBox Style="{DynamicResource PasswordBoxDefault}" x:Name="PasswordRepeatTextBox" Height="30" Width="150" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="18"></PasswordBox>
                     <Separator Visibility="Hidden" Margin="0, 15, 0, 0"/>
                     <TextBox Style="{DynamicResource TextBoxDefault}" x:Name="FirstNameTextBox" Height="30" Width="150" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="18"></TextBox>
                     <Separator Visibility="Hidden" Margin="0, 15, 0, 0"/>
                     <TextBox Style="{DynamicResource TextBoxDefault}" x:Name="LastNameTextBox" Height="30" Width="150" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="18"></TextBox>
                 </StackPanel>
             </StackPanel>
+            <Image Name="PasswordConfirmedImage" Source="../Resources/icon-isOk.png" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 15, 92" Visibility="Hidden"/>
         </Grid>
         <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="Auto" Height="Auto" Margin="400, 0, 0, 114">
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -74,11 +75,11 @@
                 </StackPanel>
                 <Separator Visibility="Hidden" Width="10"/>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                    <ComboBox x:Name="GenderComboBox" Height="30" Width="110" HorizontalAlignment="Left" ></ComboBox>
+                    <ComboBox x:Name="GenderComboBox" Height="30" Width="110" FontSize="18" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center"></ComboBox>
                     <Separator Visibility="Hidden" Margin="0, 15, 0, 0"/>
-                    <TextBox Style="{DynamicResource TextBoxDefault}"  x:Name="DateOfBirthTextBox" Height="30" Width="110" HorizontalAlignment="Left"></TextBox>
+                    <TextBox Style="{DynamicResource TextBoxDefault}"  x:Name="DateOfBirthTextBox" Height="30" Width="110" FontSize="18" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center"></TextBox>
                     <Separator Visibility="Hidden" Margin="0, 15, 0, 0"/>
-                    <ComboBox x:Name="CountryComboBox" Height="30" Width="135"></ComboBox>
+                    <ComboBox x:Name="CountryComboBox" Height="30" Width="135" FontSize="18" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center"></ComboBox>
                 </StackPanel>
             </StackPanel>
         </Grid>
