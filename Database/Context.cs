@@ -33,5 +33,13 @@ namespace Marafon.Database
                 return country?.CountryCode;
             }
         }
+
+        public static runner GetRunnerByUser(users user)
+        {
+            using (var context = new marathonEntities())
+            {
+                return context.runner.FirstOrDefault(r => r.Email == user.Email);
+            }
+        }
     }
 }
