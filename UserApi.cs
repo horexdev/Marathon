@@ -44,6 +44,9 @@ namespace Marafon
 
         public static byte[] ConvertAvatarToBinary(string path)
         {
+            if (string.IsNullOrEmpty(path))
+                return null;
+
             using (var st = new FileStream(path, FileMode.Open))
             {
                 var buffer = new byte[st.Length];
