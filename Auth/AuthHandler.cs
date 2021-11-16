@@ -28,6 +28,22 @@ namespace Marafon.Auth
             }
 
             UserApi.SetUser(user);
+
+            // Проверка на существование аватара у пользователя
+            if (UserApi.IsUserHaveAvatar())
+            {
+                var bitmapImage = UserApi.ConvertBinaryToAvatar(user.Avatar);
+                var avatar = (Image)newPage.FindName("Avatar");
+
+                if (avatar != null)
+                    avatar.Source = bitmapImage;
+            }
+
+            var loginTextBlock = (TextBlock) newPage.FindName("LoginTextBlock");
+
+            if (loginTextBlock != null)
+                loginTextBlock.Text = $"{user.FirstName} {user.LastName}";
+
             Navigation.Navigate(newPage);
         }
     }
