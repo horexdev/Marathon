@@ -32,6 +32,10 @@
                 <TextBlock Text="Инвентарь" TextAlignment="Center"/>
             </Button>
         </UniformGrid>
+        <TextBlock Grid.Row="1" FontSize="22" Foreground="DarkSlateGray" Name="LoginTextBlock" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 20, 0, 0"></TextBlock>
+        <Border Grid.Row="1" Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20, 60, 0, 0" BorderBrush="DarkSlateGray" BorderThickness="3">
+            <Image Width="100" Height="100" Name="Avatar" Stretch="Fill" Source="../Resources/avatar-null.jpg"/>
+        </Border>
         <Button Grid.Row="0" Width="75" Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" Content="Logout" Style="{DynamicResource RoundButton}" FontSize="16" FontWeight="Black" Name="LogoutButton"></Button>
         <TextBlock Text="{Binding TimeStampLine}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Foreground="AliceBlue" Grid.Row="2" Name="Timer"/>
     </Grid>
