@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
+using System.Windows;
 using Marafon.Database;
 
 namespace Marafon.Registration
@@ -7,7 +8,7 @@ namespace Marafon.Registration
     public class RegistrationHandler
     {
         public void RegisterUser(string email, string password, string firstName, string lastName,
-            string roleAbbreviation)
+            string roleAbbreviation, byte[] binaryAvatar)
         {
             using (var context = new marathonEntities())
             {
@@ -17,6 +18,7 @@ namespace Marafon.Registration
                     Password = password,
                     FirstName = firstName,
                     LastName = lastName,
+                    Avatar = binaryAvatar,
                     RoleId = roleAbbreviation
                 };
 
