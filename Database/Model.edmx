@@ -158,8 +158,9 @@
           </Key>
           <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="80" />
-          <Property Name="LastName" Type="varchar" MaxLength="80" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="Avatar" Type="varbinary(max)" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="80" Nullable="false" />
           <Property Name="RoleId" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="volunteer">
@@ -196,6 +197,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_runner_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="runner" Type="Self.runner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="Email" />
+            </Principal>
+            <Dependent Role="runner">
+              <PropertyRef Name="Email" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_staff_positions">
           <End Role="positions" Type="Self.positions" Multiplicity="1" />
           <End Role="staff" Type="Self.staff" Multiplicity="*" />
@@ -217,6 +230,18 @@
             </Principal>
             <Dependent Role="timesheet">
               <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_role">
+          <End Role="role" Type="Self.role" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -304,18 +329,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="runner_ibfk_1">
-          <End Role="users" Type="Self.users" Multiplicity="1" />
-          <End Role="runner" Type="Self.runner" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="users">
-              <PropertyRef Name="Email" />
-            </Principal>
-            <Dependent Role="runner">
-              <PropertyRef Name="Email" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="runner_ibfk_2">
           <End Role="gender" Type="Self.gender" Multiplicity="1" />
           <End Role="runner" Type="Self.runner" Multiplicity="*" />
@@ -349,18 +362,6 @@
             </Principal>
             <Dependent Role="sponsorship">
               <PropertyRef Name="RegistrationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="users_ibfk_1">
-          <End Role="role" Type="Self.role" Multiplicity="1" />
-          <End Role="users" Type="Self.users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="role">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="users">
-              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -415,6 +416,10 @@
             <End Role="marathon" EntitySet="marathon" />
             <End Role="event" EntitySet="event" />
           </AssociationSet>
+          <AssociationSet Name="FK_runner_users" Association="Self.FK_runner_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="runner" EntitySet="runner" />
+          </AssociationSet>
           <AssociationSet Name="FK_staff_positions" Association="Self.FK_staff_positions">
             <End Role="positions" EntitySet="positions" />
             <End Role="staff" EntitySet="staff" />
@@ -422,6 +427,10 @@
           <AssociationSet Name="FK_timesheet_staff" Association="Self.FK_timesheet_staff">
             <End Role="staff" EntitySet="staff" />
             <End Role="timesheet" EntitySet="timesheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_role" Association="Self.FK_users_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="users" EntitySet="users" />
           </AssociationSet>
           <AssociationSet Name="marathon_ibfk_1" Association="Self.marathon_ibfk_1">
             <End Role="country" EntitySet="country" />
@@ -451,10 +460,6 @@
             <End Role="event" EntitySet="event" />
             <End Role="registrationevent" EntitySet="registrationevent" />
           </AssociationSet>
-          <AssociationSet Name="runner_ibfk_1" Association="Self.runner_ibfk_1">
-            <End Role="users" EntitySet="users" />
-            <End Role="runner" EntitySet="runner" />
-          </AssociationSet>
           <AssociationSet Name="runner_ibfk_2" Association="Self.runner_ibfk_2">
             <End Role="gender" EntitySet="gender" />
             <End Role="runner" EntitySet="runner" />
@@ -466,10 +471,6 @@
           <AssociationSet Name="sponsorship_ibfk_1" Association="Self.sponsorship_ibfk_1">
             <End Role="registration" EntitySet="registration" />
             <End Role="sponsorship" EntitySet="sponsorship" />
-          </AssociationSet>
-          <AssociationSet Name="users_ibfk_1" Association="Self.users_ibfk_1">
-            <End Role="role" EntitySet="role" />
-            <End Role="users" EntitySet="users" />
           </AssociationSet>
           <AssociationSet Name="volunteer_ibfk_1" Association="Self.volunteer_ibfk_1">
             <End Role="country" EntitySet="country" />
@@ -669,11 +670,12 @@
           </Key>
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RoleId" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="role" Relationship="Self.users_ibfk_1" FromRole="users" ToRole="role" />
           <NavigationProperty Name="runner" Relationship="Self.runner_ibfk_1" FromRole="users" ToRole="runner" />
+          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="volunteer">
           <Key>
@@ -1167,6 +1169,7 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="marathonModel.users">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
