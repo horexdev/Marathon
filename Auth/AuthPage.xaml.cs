@@ -17,7 +17,11 @@ namespace Marafon.Auth
 
             GoBackButton.Click += Navigation.GoBack;
             SignInButton.Click += SignInButton_Click;
+
+            _authHandler = new AuthHandler();
         }
+
+        private readonly AuthHandler _authHandler;
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
@@ -36,7 +40,7 @@ namespace Marafon.Auth
                 return;
             }
 
-            AuthHandler.AuthorizeUser(user);
+            _authHandler.AuthorizeUser(user);
             MessageBox.Show("Вы успешно авторизовались!");
             Navigation.Navigate(new RunnerMenu());
         }

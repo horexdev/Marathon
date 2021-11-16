@@ -5,9 +5,9 @@ using Marafon.Menu;
 
 namespace Marafon.Auth
 {
-    public static class AuthHandler
+    public class AuthHandler
     {
-        public static void AuthorizeUser(users user)
+        public void AuthorizeUser(users user)
         {
             var role = Context.FindRoleNameById(user.RoleId);
             Page newPage;
