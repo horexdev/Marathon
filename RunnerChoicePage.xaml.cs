@@ -15,6 +15,7 @@ namespace Marafon
             InitializeComponent();
 
             GoBackButton.Click += Navigation.GoBack;
+            SignInButton.Click += ParticipatedEarlierButton_Click;
             NewParticipiantButton.Click += NewParticipiantButton_Click;
             ParticipatedEarlierButton.Click += ParticipatedEarlierButton_Click;
         }
