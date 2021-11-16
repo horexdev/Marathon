@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Marafon.Database;
+using Microsoft.Win32;
 
 namespace Marafon.Registration
 {
@@ -23,12 +25,15 @@ namespace Marafon.Registration
 
             GoBackButton.Click += Navigation.GoBack;
             RegisterButton.Click += RegisterButton_Click;
-            PasswordRepeatTextBox.PasswordChanged += PasswordRepeatTextBox_TextChanged; ;
+            PasswordRepeatTextBox.PasswordChanged += PasswordRepeatTextBox_TextChanged;
+            PasswordTextBox.PasswordChanged += PasswordRepeatTextBox_TextChanged;
+            LoadAvatarButton.Click += LoadAvatarButton_Click;
 
             _registrationHandler = new RegistrationHandler();
         }
 
         private readonly RegistrationHandler _registrationHandler;
+        private byte[] _binaryAvatar;
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
@@ -75,7 +80,7 @@ namespace Marafon.Registration
                 return;
             }
 
-            _registrationHandler.RegisterUser(email, password, firstName, lastName, roleAbbreviation);
+            _registrationHandler.RegisterUser(email, password, firstName, lastName, roleAbbreviation, _binaryAvatar);
             _registrationHandler.RegisterRunner(email, gender, new DateTime(), countryCode);
         }
 
@@ -93,6 +98,16 @@ namespace Marafon.Registration
 
                 PasswordConfirmedImage.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void LoadAvatarButton_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            var avatarPath = "";
+            if (openFileDialog.ShowDialog() == true)
+                avatarPath = openFileDialog.FileName;
+
+            _binaryAvatar = UserApi.ConvertAvatarToBinary(avatarPath);
         }
     }
 }
