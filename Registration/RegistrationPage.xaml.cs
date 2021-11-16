@@ -89,6 +89,9 @@ namespace Marafon.Registration
             var currentPassword = PasswordTextBox.Password;
             var repeatedPassword = PasswordRepeatTextBox.Password;
 
+            if (string.IsNullOrEmpty(currentPassword) || string.IsNullOrEmpty(currentPassword))
+                return;
+
             if (currentPassword == repeatedPassword)
                 PasswordConfirmedImage.Visibility = Visibility.Visible;
             else

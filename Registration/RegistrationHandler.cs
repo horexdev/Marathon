@@ -14,10 +14,10 @@ namespace Marafon.Registration
             {
                 var user = new users
                 {
-                    Email = email,
-                    Password = password,
-                    FirstName = firstName,
-                    LastName = lastName,
+                    Email = email.Trim(' '),
+                    Password = password.Trim(' '),
+                    FirstName = firstName.Trim(' '),
+                    LastName = lastName.Trim(' '),
                     Avatar = binaryAvatar,
                     RoleId = roleAbbreviation
                 };
@@ -33,7 +33,7 @@ namespace Marafon.Registration
             {
                 var runner = new runner
                 {
-                    Email = email,
+                    Email = email.Trim(' '),
                     Gender = gender,
                     DateOfBirth = new DateTime?(),
                     CountryCode = countryCode
