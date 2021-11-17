@@ -66,8 +66,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AboutFundWindow.xaml.cs">
+      <DependentUpon>AboutFundWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Auth\AuthHandler.cs" />
     <Compile Include="Registration\RegistrationHandler.cs" />
+    <Compile Include="Registration\RegistrationOnMarathon.xaml.cs">
+      <DependentUpon>RegistrationOnMarathon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RoleTypes.cs" />
     <Compile Include="Database\Context.cs" />
     <Compile Include="MarathonInfo.xaml.cs">
@@ -173,6 +179,10 @@
     <Compile Include="RunnerSponsorPage.xaml.cs">
       <DependentUpon>RunnerSponsorPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="AboutFundWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Auth\AuthPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +219,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Registration\RegistrationOnMarathon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Registration\RegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
