@@ -60,5 +60,19 @@
                 </Style>
             </Style.Resources>
         </Style>
+        <Style TargetType="CheckBox" x:Key="CheckBoxMarathonType">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="RadioButton" x:Key="RadioButtonMarathonType">
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="2" ScaleY="2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>
