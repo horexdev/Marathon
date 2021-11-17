@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Documents;
 
 namespace Marafon.Database
 {
@@ -39,6 +41,42 @@ namespace Marafon.Database
             using (var context = new marathonEntities())
             {
                 return context.runner.FirstOrDefault(r => r.Email == user.Email);
+            }
+        }
+
+        /// <summary>
+        /// Возвращает список названий стран
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetCountriesList()
+        {
+            using (var context = new marathonEntities())
+            {
+                return context.country.Select(c => c.CountryName).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Возвращает список названий гендеров
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetGendersList()
+        {
+            using (var context = new marathonEntities())
+            {
+                return context.gender.Select(g => g.Gender1).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Возвращает список объектов благотворительных организаций
+        /// </summary>
+        /// <returns></returns>
+        public static List<charity> GetFundsList()
+        {
+            using (var context = new marathonEntities())
+            {
+                return context.charity.ToList();
             }
         }
     }
