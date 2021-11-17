@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Marathon Skills 2016" Height="600" Width="800">
+        Title="Marathon Skills 2016" Height="650" Width="800">
     <Grid Background="DarkSlateGray">
         <Frame Name="FrmMain" NavigationUIVisibility="Hidden"/>
     </Grid>
