@@ -41,7 +41,6 @@ namespace Marafon.Auth
             }
 
             _authHandler.AuthorizeUser(user);
-            MessageBox.Show("Вы успешно авторизовались!");
         }
     }
 }
