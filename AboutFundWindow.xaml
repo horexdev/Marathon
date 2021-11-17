@@ -5,8 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Marafon"
         mc:Ignorable="d"
-        Title="AboutFundWindow" Height="300" Width="600">
+        Title="" MinHeight="300" MaxHeight="300" MinWidth="450" MaxWidth="600" Height="300" Width="600" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="{Binding CharityName}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <UniformGrid Grid.Row="1" Columns="1" Rows="2">
+            <Ellipse HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding CharityLogo}"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <TextBlock Name="Description" Text="{Binding CharityDescription}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+            </ScrollViewer>
+        </UniformGrid>
     </Grid>
 </Window>

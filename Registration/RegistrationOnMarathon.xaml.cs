@@ -21,6 +21,15 @@ namespace Marafon.Registration
         private void FundInfoButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             var aboutPage = new AboutFundWindow();
+            var charity = FundComboBox.SelectedItem as charity;
+            var logoPath = $"../Resources/{charity?.CharityLogo}";
+            var obj = new
+            {
+                CharityName = charity?.CharityName,
+                CharityDescription = charity?.CharityDescription,
+                CharityLogo = logoPath
+            };
+            aboutPage.DataContext = obj;
             aboutPage.Show();
         }
     }
