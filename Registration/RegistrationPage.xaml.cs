@@ -17,17 +17,15 @@ namespace Marafon.Registration
         {
             InitializeComponent();
 
-            using (var context = new marathonEntities())
-            {
-                CountryComboBox.ItemsSource = context.country.Select(c => c.CountryName).ToList();
-                GenderComboBox.ItemsSource = context.gender.Select(g => g.Gender1).ToList();
-            }
+            CountryComboBox.ItemsSource = Context.GetCountriesList();
+            GenderComboBox.ItemsSource = Context.GetGendersList();
 
             GoBackButton.Click += Navigation.GoBack;
             RegisterButton.Click += RegisterButton_Click;
             PasswordRepeatTextBox.PasswordChanged += PasswordRepeatTextBox_TextChanged;
             PasswordTextBox.PasswordChanged += PasswordRepeatTextBox_TextChanged;
             LoadAvatarButton.Click += LoadAvatarButton_Click;
+            DateOfBirthPicker.PreviewTextInput += DateOfBirthPicker_PreviewTextInput;
 
             _registrationHandler = new RegistrationHandler();
         }
@@ -42,10 +40,11 @@ namespace Marafon.Registration
             var passwordRepeat = PasswordRepeatTextBox.Password;
             var firstName = FirstNameTextBox.Text;
             var lastName = LastNameTextBox.Text;
-            var gender = GenderComboBox.SelectedItem.ToString();
-            var country = CountryComboBox.SelectedItem.ToString();
+            var gender = GenderComboBox.SelectedItem?.ToString();
+            var country = CountryComboBox.SelectedItem?.ToString();
             var countryCode = Context.GetCountryCodeByName(country);
             var roleAbbreviation = RoleTypes.GetAbbreviation(RoleTypes.Runner);
+            var dateOfBirth = DateOfBirthPicker.SelectedDate;
 
             if (string.IsNullOrEmpty(email)
                 || string.IsNullOrEmpty(password)
@@ -53,7 +52,8 @@ namespace Marafon.Registration
                 || string.IsNullOrEmpty(firstName)
                 || string.IsNullOrEmpty(lastName)
                 || string.IsNullOrEmpty(gender)
-                || string.IsNullOrEmpty(country))
+                || string.IsNullOrEmpty(country)
+                || dateOfBirth == null)
                 return;
 
             if (_registrationHandler.IsValidPassword(password) == false)
@@ -81,7 +81,7 @@ namespace Marafon.Registration
             }
 
             _registrationHandler.RegisterUser(email, password, firstName, lastName, roleAbbreviation, _binaryAvatar);
-            _registrationHandler.RegisterRunner(email, gender, new DateTime(), countryCode);
+            _registrationHandler.RegisterRunner(email, gender, dateOfBirth.Value, countryCode);
         }
 
         private void PasswordRepeatTextBox_TextChanged(object sender, RoutedEventArgs e)
@@ -112,5 +112,7 @@ namespace Marafon.Registration
 
             _binaryAvatar = UserApi.ConvertAvatarToBinary(avatarPath);
         }
+
+        private void DateOfBirthPicker_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e) => e.Handled = true;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Windows;
 using Marafon.Database;
 
@@ -14,10 +15,10 @@ namespace Marafon.Registration
             {
                 var user = new users
                 {
-                    Email = email.Trim(' '),
-                    Password = password.Trim(' '),
-                    FirstName = firstName.Trim(' '),
-                    LastName = lastName.Trim(' '),
+                    Email = email,
+                    Password = password,
+                    FirstName = firstName,
+                    LastName = lastName,
                     Avatar = binaryAvatar,
                     RoleId = roleAbbreviation
                 };
@@ -52,8 +53,10 @@ namespace Marafon.Registration
             }
             try
             {
+                var regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 var addr = new MailAddress(email);
-                return addr.Address == email;
+
+                return addr.Address == email && regex.IsMatch(email);
             }
             catch
             {
